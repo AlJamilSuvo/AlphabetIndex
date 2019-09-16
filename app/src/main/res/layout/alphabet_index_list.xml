@@ -50,7 +50,7 @@
             android:layout_toLeftOf="@id/alphabetList">
 
             <TextView
-                android:textColor="?colorAccent"
+                android:textColor="?colorOnPrimary"
                 android:id="@+id/tvAlphabetIndicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
