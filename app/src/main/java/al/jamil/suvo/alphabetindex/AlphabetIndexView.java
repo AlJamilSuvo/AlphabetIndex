@@ -2,6 +2,9 @@ package al.jamil.suvo.alphabetindex;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -32,11 +35,21 @@ public class AlphabetIndexView extends RelativeLayout {
     public AlphabetIndexView(Context context, AttributeSet attrs) {
         super(context, attrs);
         binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.alphabet_index_list, this, true);
+        TypedArray properties = context.obtainStyledAttributes(attrs, R.styleable.AlphabetIndexView);
+        int textColor = properties.getColor(R.styleable.AlphabetIndexView_box_text_color, Color.argb(255, 0, 0, 0));
+        binding.tvAlphabetIndicator.setTextColor(textColor);
+        boolean useCustomImage = properties.getBoolean(R.styleable.AlphabetIndexView_use_custom_image, false);
+        if (useCustomImage) {
+            binding.alphabetIndicator.setBackground(properties.getDrawable(R.styleable.AlphabetIndexView_use_custom_image));
+        }
+
+
         adapter = new AlphabetAdapter();
         binding.alphabetList.setAdapter(adapter);
         binding.alphabetIndicator.setVisibility(GONE);
         this.alphabetIndexMap = new HashMap<>();
         this.alphabets = new ArrayList<>();
+        properties.recycle();
 
     }
 
