@@ -9,31 +9,30 @@
         android:orientation="horizontal">
 
         <TextView
-            android:paddingStart="@dimen/standard_2"
             android:id="@+id/alphabetNormal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/brandGray"
-            android:textAlignment="center"
+            android:paddingStart="@dimen/standard_2"
             android:paddingTop="1dp"
             android:paddingEnd="@dimen/standard_2"
             android:paddingBottom="1dp"
+            android:textAlignment="center"
             android:textColor="?colorAccent"
             android:textSize="10sp"
             tools:text="A" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/alphabetHighlighted"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/white"
+            android:padding="@dimen/standard_2"
             android:textAlignment="center"
             android:textColor="@android:color/black"
-            android:padding="@dimen/standard_2"
-            android:text="?colorOnPrimary"
             android:textSize="12sp"
             android:textStyle="bold"
+            android:visibility="gone"
             tools:text="W" />
     </LinearLayout>
 

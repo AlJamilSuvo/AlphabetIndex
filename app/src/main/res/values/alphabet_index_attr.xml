@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="AlphabetIndexView">
-        <attr name="box_color" format="color" />
-        <attr name="box_text_color" format="color" />
-        <attr name="use_custom_image" format="boolean" />
-        <attr name="box_image" format="reference" />
+        <attr name="bubble_color" format="color" />
+        <attr name="bubble_text_color" format="color" />
+        <attr name="scroll_indicator_color" format="color" />
+        <attr name="list_alphabet_text_color" format="color" />
+        <attr name="use_custom_bubble_image" format="boolean" />
+        <attr name="custom_bubble_image" format="reference" />
     </declare-styleable>
 
 </resources>
