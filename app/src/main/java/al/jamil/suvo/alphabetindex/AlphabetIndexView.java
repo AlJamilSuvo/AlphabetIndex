@@ -63,8 +63,6 @@ public class AlphabetIndexView extends RelativeLayout {
     }
 
     public void updateIndex(HashMap<String, Integer> alphabetIndexMap, List<String> alphabets) {
-        String preStr = "…";
-        String postStr = "#";
         this.alphabetIndexMap.clear();
         this.alphabets.clear();
         boolean isFirst = true;
@@ -72,22 +70,22 @@ public class AlphabetIndexView extends RelativeLayout {
         boolean isLast = true;
         for (String alphabet : alphabets) {
             char ch = alphabet.charAt(0);
-            if (ch < 'A' || ch > 'Z') {
-                if (isFirst) {
-                    this.alphabets.add(preStr);
-                    this.alphabetIndexMap.put(preStr, alphabetIndexMap.get(alphabet));
-                    isFirst = false;
-                } else if (isAbcFound && isLast) {
-                    isLast = false;
-                    this.alphabets.add(postStr);
-                    this.alphabetIndexMap.put(postStr, alphabetIndexMap.get(alphabet));
-                }
-            } else {
-                isAbcFound = true;
-                isFirst = false;
-                this.alphabets.add(alphabet);
-                this.alphabetIndexMap.put(alphabet, alphabetIndexMap.get(alphabet));
-            }
+//            if (ch < 'A' || ch > 'Z') {
+//                if (isFirst) {
+//                    this.alphabets.add(preStr);
+//                    this.alphabetIndexMap.put(preStr, alphabetIndexMap.get(alphabet));
+//                    isFirst = false;
+//                } else if (isAbcFound && isLast) {
+//                    isLast = false;
+//                    this.alphabets.add(postStr);
+//                    this.alphabetIndexMap.put(postStr, alphabetIndexMap.get(alphabet));
+//                }
+//            } else {
+            isAbcFound = true;
+            isFirst = false;
+            this.alphabets.add(alphabet);
+            this.alphabetIndexMap.put(alphabet, alphabetIndexMap.get(alphabet));
+//            }
         }
         if (!isAbcFound) super.setVisibility(GONE);
         else super.setVisibility(VISIBLE);
@@ -115,7 +113,7 @@ public class AlphabetIndexView extends RelativeLayout {
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
                 getHandler().postDelayed(() -> {
                     binding.alphabetIndicator.setVisibility(GONE);
-                    binding.scrollIndicator.setVisibility(GONE);
+                    binding.scrollIndicator.setVisibility(VISIBLE);
                 }, 500);
             }
 
