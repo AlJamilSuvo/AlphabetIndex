@@ -8,22 +8,18 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import al.jamil.suvo.alphabetindex.databinding.AlphabetIndexListBinding;
-import al.jamil.suvo.alphabetindex.databinding.AlphabetIndexSingleItemBinding;
 
 public class AlphabetIndexView extends RelativeLayout {
     AlphabetIndexListBinding binding;
@@ -65,7 +61,7 @@ public class AlphabetIndexView extends RelativeLayout {
 
     }
 
-    public void updateIndex(HashMap<String, Integer> alphabetIndexMap, List<String> alphabets) {
+    public void updateIndex(HashMap<String, Integer> alphabetIndexMap, List<String> alphabets, int totalIndexSize) {
         this.alphabetIndexMap.clear();
         this.alphabets.clear();
         boolean isFirst = true;
@@ -109,9 +105,7 @@ public class AlphabetIndexView extends RelativeLayout {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                binding.scrollIndicator.setTranslationY(dy);
-
-
+                binding.scrollIndicator.setTranslationY(binding.scrollIndicator.getY() + dy);
             }
         });
 
