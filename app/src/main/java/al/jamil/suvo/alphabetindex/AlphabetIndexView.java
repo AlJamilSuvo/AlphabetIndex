@@ -109,7 +109,7 @@ public class AlphabetIndexView extends RelativeLayout {
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
                 getHandler().postDelayed(() -> {
                     binding.alphabetIndicator.setVisibility(GONE);
-                    binding.scrollIndicator.setVisibility(VISIBLE);
+                    binding.scrollIndicator.setVisibility(GONE);
                 }, 500);
             }
 
@@ -117,7 +117,6 @@ public class AlphabetIndexView extends RelativeLayout {
             return false;
         });
     }
-
 
 
 }
