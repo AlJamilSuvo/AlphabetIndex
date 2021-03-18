@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -105,7 +106,28 @@ public class AlphabetIndexView extends RelativeLayout {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                binding.scrollIndicator.setTranslationY(binding.scrollIndicator.getY() + dy);
+
+
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) target.getLayoutManager();
+                int topVisibleMessageIndex = -1;
+                int bottomVisibleMessageIndex = -1;
+                if (linearLayoutManager != null) {
+                    bottomVisibleMessageIndex = linearLayoutManager.findFirstVisibleItemPosition();
+                }
+                if (linearLayoutManager != null) {
+                    topVisibleMessageIndex = linearLayoutManager.findLastVisibleItemPosition();
+                }
+
+                int index = (topVisibleMessageIndex + bottomVisibleMessageIndex) / 2;
+                if (topVisibleMessageIndex <= 0) {
+                    binding.scrollIndicator.setVisibility(GONE);
+                } else {
+                    binding.scrollIndicator.setVisibility(VISIBLE);
+                    float ddy = (float) index * binding.alphabetList.getHeight() / (float) totalIndexSize;
+                    binding.scrollIndicator.setTranslationY(scrollIndicatorY+ddy);
+
+                }
+
             }
         });
 
