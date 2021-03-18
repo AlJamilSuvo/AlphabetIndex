@@ -12,19 +12,13 @@
             android:layout_height="match_parent">
 
 
-            <androidx.recyclerview.widget.RecyclerView
+            <View
                 android:id="@+id/alphabetList"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:paddingStart="@dimen/standard_24"
-                android:paddingLeft="@dimen/standard_24"
-                android:paddingEnd="@dimen/standard_4"
-                android:paddingRight="@dimen/standard_4"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="40"
-                tools:listitem="@layout/alphabet_index_single_item" />
+                android:layout_centerVertical="true" />
 
 
             <ImageView

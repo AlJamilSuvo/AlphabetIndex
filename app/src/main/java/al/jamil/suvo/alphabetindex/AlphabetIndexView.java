@@ -28,7 +28,6 @@ public class AlphabetIndexView extends RelativeLayout {
     AlphabetIndexListBinding binding;
     RecyclerView target;
     HashMap<String, Integer> alphabetIndexMap;
-    AlphabetAdapter adapter;
     List<String> alphabets;
     String highLightedStr = "";
 
@@ -53,8 +52,6 @@ public class AlphabetIndexView extends RelativeLayout {
         binding.tvAlphabetIndicator.setTextColor(bubbleTextColor);
 
 
-        adapter = new AlphabetAdapter(listAlphabetColor);
-        binding.alphabetList.setAdapter(adapter);
         binding.alphabetIndicator.setVisibility(GONE);
         this.alphabetIndexMap = new HashMap<>();
         this.alphabets = new ArrayList<>();
@@ -90,7 +87,6 @@ public class AlphabetIndexView extends RelativeLayout {
         if (!isAbcFound) super.setVisibility(GONE);
         else super.setVisibility(VISIBLE);
         highLightedStr = "";
-        adapter.notifyDataSetChanged();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -122,58 +118,6 @@ public class AlphabetIndexView extends RelativeLayout {
         });
     }
 
-    class AlphabetViewHolder extends RecyclerView.ViewHolder {
-        AlphabetIndexSingleItemBinding binding;
 
-        AlphabetViewHolder(AlphabetIndexSingleItemBinding binding, int textColor) {
-            super(binding.getRoot());
-            this.binding = binding;
-            binding.alphabetHighlighted.setTextColor(textColor);
-            binding.alphabetNormal.setTextColor(textColor);
-        }
-    }
-
-    class AlphabetAdapter extends RecyclerView.Adapter<AlphabetViewHolder> {
-
-
-        int textColor;
-
-        public AlphabetAdapter(int textColor) {
-            this.textColor = textColor;
-        }
-
-        @NonNull
-        @Override
-        public AlphabetViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            AlphabetIndexSingleItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                    R.layout.alphabet_index_single_item, parent, false);
-            return new AlphabetViewHolder(binding, textColor);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull AlphabetViewHolder holder, int position) {
-            String alphabet = alphabets.get(position);
-            if (alphabet == null) {
-                holder.binding.invalidateAll();
-            } else {
-                holder.binding.alphabetNormal.setText(alphabet);
-                holder.binding.alphabetHighlighted.setText(alphabet);
-                if (alphabet.equals(highLightedStr)) {
-                    holder.binding.alphabetHighlighted.setVisibility(VISIBLE);
-                    holder.binding.alphabetNormal.setVisibility(GONE);
-                } else {
-                    holder.binding.alphabetHighlighted.setVisibility(GONE);
-                    holder.binding.alphabetNormal.setVisibility(VISIBLE);
-                }
-            }
-
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return alphabets.size();
-        }
-    }
 
 }
