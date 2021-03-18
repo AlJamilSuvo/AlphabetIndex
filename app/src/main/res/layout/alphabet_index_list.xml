@@ -33,7 +33,7 @@
                 android:paddingEnd="4dp"
                 android:paddingRight="4dp"
                 android:src="@drawable/alphabet_index_scroll"
-                android:visibility="visible"
+                android:visibility="gone"
                 tools:visibility="visible" />
 
 
