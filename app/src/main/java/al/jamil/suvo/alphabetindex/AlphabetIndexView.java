@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -30,6 +31,8 @@ public class AlphabetIndexView extends RelativeLayout {
     HashMap<String, Integer> alphabetIndexMap;
     List<String> alphabets;
     String highLightedStr = "";
+    int totalIndexSize = 0;
+    float scrollIndicatorY = 0;
 
     public AlphabetIndexView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -55,6 +58,9 @@ public class AlphabetIndexView extends RelativeLayout {
         binding.alphabetIndicator.setVisibility(GONE);
         this.alphabetIndexMap = new HashMap<>();
         this.alphabets = new ArrayList<>();
+
+        scrollIndicatorY = binding.scrollIndicator.getY();
+
         properties.recycle();
 
     }
@@ -65,6 +71,7 @@ public class AlphabetIndexView extends RelativeLayout {
         boolean isFirst = true;
         boolean isAbcFound = false;
         boolean isLast = true;
+        this.totalIndexSize = totalIndexSize;
         for (String alphabet : alphabets) {
             char ch = alphabet.charAt(0);
 //            if (ch < 'A' || ch > 'Z') {
@@ -92,6 +99,23 @@ public class AlphabetIndexView extends RelativeLayout {
     @SuppressLint("ClickableViewAccessibility")
     public void setTarget(RecyclerView target) {
         this.target = target;
+
+        target.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                binding.scrollIndicator.setTranslationY(dy);
+
+
+            }
+        });
+
+
         binding.alphabetList.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
                 float cy = event.getY();
@@ -109,7 +133,7 @@ public class AlphabetIndexView extends RelativeLayout {
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
                 getHandler().postDelayed(() -> {
                     binding.alphabetIndicator.setVisibility(GONE);
-                    binding.scrollIndicator.setVisibility(GONE);
+                    binding.scrollIndicator.setVisibility(VISIBLE);
                 }, 500);
             }
 
