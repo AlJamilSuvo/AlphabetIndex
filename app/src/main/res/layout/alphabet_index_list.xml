@@ -11,22 +11,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
+            <ImageView
                 android:id="@+id/alphabetList"
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="?colorAccent"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:src="@android:color/transparent" />
 
 
             <ImageView
                 android:id="@+id/scrollIndicator"
                 android:layout_width="8dp"
-                android:layout_height="30dp"
+                android:layout_height="32dp"
                 android:layout_alignTop="@+id/alphabetList"
                 android:layout_alignEnd="@+id/alphabetList"
                 android:layout_alignRight="@+id/alphabetList"
